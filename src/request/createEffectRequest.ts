@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
+import type { EffectRequest } from "@privenv/protocol";
 import { findCapability } from "../manifest/index.js";
 import type { GuestManifest } from "../manifest/index.js";
-import type { EffectRequest } from "../protocol/index.js";
 import { validateRequestParams } from "../validation/index.js";
 
 export class UnknownCapabilityError extends Error {

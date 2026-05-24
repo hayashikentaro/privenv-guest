@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { ProtocolValidationError } from "@privenv/protocol";
 import { createEffectRequest, UnknownCapabilityError } from "../../src/request/index.js";
-import { RequestValidationError } from "../../src/validation/index.js";
 import { VALID_MANIFEST } from "../fixtures/manifest.js";
 
 test("request creates safe EffectRequest", () => {
@@ -30,8 +30,8 @@ test("request builder rejects forbidden params", () => {
           capabilityId: "cmd.npm.test",
           id: `req_forbidden_${key}`,
           params: { [key]: "example-placeholder-not-real" }
-        }),
-      RequestValidationError
+      }),
+      ProtocolValidationError
     );
   }
 });
@@ -45,6 +45,6 @@ test("request builder rejects nested forbidden params", () => {
         id: "req_nested_forbidden",
         params: { nested: { env: { EXAMPLE_TOKEN: "example-placeholder-not-real" } } }
       }),
-    RequestValidationError
+    ProtocolValidationError
   );
 });

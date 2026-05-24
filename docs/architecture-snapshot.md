@@ -14,6 +14,7 @@ It currently:
 - lists capabilities from the safe manifest
 - creates `EffectRequest` JSON
 - rejects forbidden request params such as raw command, env, timeout, and secret fields
+- depends on `@privenv/protocol` for shared protocol types and validators
 - never reads `.env`, `privenv.host.json`, `.privenv/vault.json`, audit logs, browser sessions, or raw secrets
 - has no transport implementation yet
 - has no passthrough implementation yet
@@ -44,11 +45,11 @@ This document does not claim implementation details from `privenv-host` beyond t
 - `RedactionSummary`
 - safe manifest shape
 
-For now, protocol documentation, local TypeScript types, and protocol fixtures are duplicated locally. A shared protocol package has not been created yet.
+Shared protocol types and validators now come from `@privenv/protocol`.
 
-Until a shared package exists, changes to `docs/protocol.md` must be mirrored manually through an explicit copied spec, issue, PR text, release note, or other written coordination. A future candidate is `@privenv/protocol`.
+Guest-specific manifest file loading, capability listing, request creation, CLI behavior, and error formatting remain local to `privenv-guest`.
 
-Guest work must not inspect `privenv-host` to verify compatibility.
+Protocol updates should be handled by updating the `@privenv/protocol` package version and reviewing explicit release notes or copied specs. Guest work must not inspect `privenv-host` or the `privenv-protocol` repository to verify compatibility.
 
 ## Current Workflow
 
@@ -92,14 +93,14 @@ Current non-goals:
 - no raw secret APIs such as `getSecret()`, `getEnv()`, or `rawEnv()`
 - no `.env` reading
 - no browser, session, or cookie handling in the current MVP
-- no shared protocol package yet
+- no local duplicated shared protocol type or validator ownership
 
 ## Next Decision Points
 
 Open decisions include:
 
-- whether to create `@privenv/protocol`
 - whether to implement stdio transport orchestration
 - whether Guest should remain transportless longer
+- when to update to newer `@privenv/protocol` versions
 - how passthrough should be represented at an upper layer
 - how future browser, session, or cookie capabilities should be represented without giving Guest credentials

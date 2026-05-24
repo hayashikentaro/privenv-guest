@@ -2,32 +2,32 @@
 
 `privenv-guest` and `privenv-host` must agree on the JSON shapes for `EffectRequest`, `EffectResponse`, and safe manifests.
 
-For now, the protocol is duplicated in both repositories as documentation and local TypeScript types. This keeps each package independent while the protocol is still small and early.
+`privenv-guest` now depends on `@privenv/protocol` for shared protocol types and validators. This reduces protocol drift while keeping Guest-specific behavior local.
 
 ## Current Process
 
-Until a shared protocol package exists:
+Protocol changes should be handled through package version updates:
 
-- changes to `docs/protocol.md` must be mirrored manually across repositories
-- changes should be coordinated through an explicit copied spec, issue, PR text, or release note
-- local fixtures in this repository should reflect the copied protocol shape
+- update the `@privenv/protocol` dependency version deliberately
+- read package release notes or an explicit copied spec
+- update local fixtures when the shared protocol shape changes
+- keep Guest-specific file loading and CLI behavior in this repository
 - `privenv-guest` must not inspect `privenv-host` to verify compatibility
+- `privenv-guest` must not inspect the `privenv-protocol` repository to verify compatibility
 
-If a Guest-side change needs Host-side details, stop and request an explicit copied spec or a shared package instead of inspecting the Host repository.
+If a Guest-side change needs Host-side or protocol implementation details, stop and request an explicit copied spec or package release information instead of inspecting sibling repositories.
 
-## Future Shared Package
+## Shared Package
 
-Future work may introduce a shared package such as `@privenv/protocol`.
-
-That package could own:
+`@privenv/protocol` owns:
 
 - `EffectRequest`
 - `EffectResponse`
 - `RedactionSummary`
 - safe manifest types
-- protocol conformance fixtures
+- protocol validators
 
-Until then, duplicated local specs are intentional.
+Local protocol fixtures remain as compatibility examples and regression tests.
 
 ## Boundary Reminder
 

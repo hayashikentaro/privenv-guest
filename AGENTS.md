@@ -7,9 +7,11 @@ Guidance for future Codex agents working in `privenv-guest`.
 - Work only in this repository: `privenv-guest`.
 - Do not inspect sibling repositories.
 - Do not inspect `privenv-host`.
+- Do not inspect `privenv-protocol`.
 - Do not infer requirements from sibling repositories or unrelated projects.
 - If you need Host details, stop and report that need instead of inspecting `privenv-host`.
 - Do not inspect `privenv-host` to compare protocol compatibility. Request an explicit copied spec or shared protocol package instead.
+- Do not inspect `privenv-protocol` to compare protocol compatibility. Use the published `@privenv/protocol` package and explicit release notes or copied specs.
 - Do not update architecture snapshots by inspecting `privenv-host`; use only local docs and explicit copied specs.
 - If you are not in `privenv-guest`, stop and report it.
 
@@ -17,6 +19,8 @@ Guidance for future Codex agents working in `privenv-guest`.
 
 - This repository has a minimal TypeScript Guest-side toolkit skeleton.
 - The skeleton can read `privenv.manifest.json`, list capabilities, create safe `EffectRequest` JSON, and reject forbidden request params.
+- Shared protocol types and validators come from `@privenv/protocol`.
+- Guest-specific file loading and CLI behavior remain local.
 - Do not implement Host runtime.
 - Do not implement transport to Host unless explicitly asked.
 - Do not implement stdio client unless explicitly asked.

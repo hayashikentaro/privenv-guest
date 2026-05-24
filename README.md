@@ -22,6 +22,7 @@ Implemented:
 - create safe `EffectRequest` JSON
 - reject forbidden request params
 - validate manifest safety shape
+- use `@privenv/protocol` for shared protocol types and validators
 
 Not implemented:
 
@@ -113,7 +114,11 @@ The Guest reads `privenv.manifest.json` only and sends `EffectRequest` only.
 
 ## Protocol Compatibility
 
-`privenv-guest` and `privenv-host` must agree on `EffectRequest`, `EffectResponse`, and safe manifest shapes. For now, protocol docs and types are duplicated locally. Do not inspect `privenv-host` to compare protocol; use an explicit copied spec or future shared package instead.
+`privenv-guest` depends on `@privenv/protocol` for shared `EffectRequest`, `EffectResponse`, redaction summary, safe manifest types, and protocol validators. This reduces protocol drift between packages.
+
+Guest-specific file loading, capability listing, request creation, CLI behavior, and error formatting remain local to `privenv-guest`.
+
+Do not inspect `privenv-host` or `privenv-protocol` repositories to compare protocol behavior. Handle protocol updates through npm package version updates and explicit release notes.
 
 ## Transport
 

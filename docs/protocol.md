@@ -4,6 +4,8 @@ Phase 1 uses stdio JSON request/response with the Host. Phase 2 may add a future
 
 This repository documents the Guest-side protocol only. It does not implement transport yet.
 
+`privenv-guest` imports shared protocol types and validators from `@privenv/protocol`. The interfaces below mirror that public package contract for readability. Protocol updates should be handled by updating the package version, not by inspecting sibling repositories.
+
 ## EffectRequest
 
 ```ts

@@ -1,1 +1,1 @@
-export { FORBIDDEN_PARAM_KEYS, RequestValidationError, validateRequestParams } from "./requestParams.js";
+export { ProtocolValidationError, validateRequestParams } from "@privenv/protocol";
