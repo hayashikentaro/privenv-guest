@@ -111,6 +111,10 @@ The Guest reads `privenv.manifest.json` only and sends `EffectRequest` only.
 - **demo**: Guest may use fixture manifests and examples; no real secrets.
 - **passthrough**: no untrusted Guest boundary is active. Passthrough is for trusted production/runtime use only, is not safe for AI agent execution, and is not implemented yet.
 
+## Protocol Compatibility
+
+`privenv-guest` and `privenv-host` must agree on `EffectRequest`, `EffectResponse`, and safe manifest shapes. For now, protocol docs and types are duplicated locally. Do not inspect `privenv-host` to compare protocol; use an explicit copied spec or future shared package instead.
+
 ## Transport
 
 Phase 1 is stdio JSON request/response with the Host. Phase 2 may add a future transport such as Unix domain socket. Transport is documented only in this repository for now and is not implemented yet.
@@ -121,6 +125,7 @@ Phase 1 is stdio JSON request/response with the Host. Phase 2 may add a future t
 - [Trust Model](docs/trust-model.md)
 - [Guest Boundary](docs/guest-boundary.md)
 - [Protocol](docs/protocol.md)
+- [Protocol Compatibility](docs/protocol-compatibility.md)
 - [Manifest Spec](docs/manifest-spec.md)
 - [Modes](docs/modes.md)
 - [MVP Scope](docs/mvp-scope.md)
