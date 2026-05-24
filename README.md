@@ -11,17 +11,61 @@ Core principle:
 
 > Guests never read secrets directly. Guests request effects executed by the Host.
 
-## Initial Scope
+## Current Status
 
-`privenv-guest` focuses on:
+This repository now contains a minimal TypeScript Guest-side toolkit skeleton.
 
-- reading `privenv.manifest.json`
-- listing safe capabilities
-- creating `EffectRequest` JSON
-- validating that Guest requests do not include raw command, env, timeout, or secret fields
-- documenting Guest boundary and operational modes
+Implemented:
 
-This repository is documentation-only for now. Do not add runtime code, `package.json`, or dependencies until explicitly requested.
+- read `privenv.manifest.json`
+- list safe capabilities
+- create safe `EffectRequest` JSON
+- reject forbidden request params
+- validate manifest safety shape
+
+Not implemented:
+
+- Host runtime
+- transport to Host
+- stdio client
+- passthrough behavior
+- secret reading of any kind
+
+## Quick Start
+
+Install dependencies, then run the local checks:
+
+```sh
+npm install
+npm run typecheck
+npm test
+```
+
+Create or obtain a Host-generated `privenv.manifest.json`, then list capabilities:
+
+```sh
+privenv-guest list
+```
+
+Create an `EffectRequest` for a capability:
+
+```sh
+privenv-guest request cmd.npm.test
+```
+
+The request is printed to stdout. It is not sent to a Host yet because transport is not implemented.
+
+## CLI Commands
+
+### `privenv-guest list`
+
+Reads `privenv.manifest.json` from the current working directory and prints safe capability metadata as JSON.
+
+### `privenv-guest request <capabilityId>`
+
+Reads `privenv.manifest.json`, verifies the capability exists, and prints `EffectRequest` JSON.
+
+Requests do not include `params` by default.
 
 ## Guest Boundary
 
@@ -38,6 +82,16 @@ The Guest reads `privenv.manifest.json` only and sends `EffectRequest` only.
 
 `privenv-guest` must not expose `getSecret()`, `getEnv()`, `rawEnv()`, raw vault readers, or raw `.env` readers.
 
+## Initial Scope
+
+`privenv-guest` focuses on:
+
+- reading `privenv.manifest.json`
+- listing safe capabilities
+- creating `EffectRequest` JSON
+- validating that Guest requests do not include raw command, env, timeout, or secret fields
+- documenting Guest boundary and operational modes
+
 ## Modes
 
 - **protected**: Guest uses a safe manifest, sends `EffectRequest` to Host, and never reads secrets.
@@ -46,7 +100,7 @@ The Guest reads `privenv.manifest.json` only and sends `EffectRequest` only.
 
 ## Transport
 
-Phase 1 is stdio JSON request/response with the Host. Phase 2 may add a future transport such as Unix domain socket. Transport is documented only in this repository for now.
+Phase 1 is stdio JSON request/response with the Host. Phase 2 may add a future transport such as Unix domain socket. Transport is documented only in this repository for now and is not implemented yet.
 
 ## Documentation
 

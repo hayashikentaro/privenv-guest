@@ -1,0 +1,23 @@
+{
+  "name": "privenv-guest",
+  "version": "0.1.0",
+  "description": "Guest-side toolkit skeleton for privenv.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "privenv-guest": "./dist/src/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test dist/tests",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "npm run build --silent && node dist/src/cli/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

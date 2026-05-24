@@ -13,14 +13,16 @@ Guidance for future Codex agents working in `privenv-guest`.
 
 ## Current Stage
 
-- This repository is documentation-only.
-- Do not add runtime implementation unless explicitly asked.
-- Do not create `package.json` unless explicitly asked.
-- Do not install dependencies unless explicitly asked.
+- This repository has a minimal TypeScript Guest-side toolkit skeleton.
+- The skeleton can read `privenv.manifest.json`, list capabilities, create safe `EffectRequest` JSON, and reject forbidden request params.
+- Do not implement Host runtime.
+- Do not implement transport to Host unless explicitly asked.
+- Do not implement stdio client unless explicitly asked.
+- Do not implement passthrough behavior unless explicitly asked.
 
-## Host/Guest Boundary
+## Guest-Only Scope
 
-- Preserve the Host/Guest boundary in every document and design change.
+- Preserve the Guest-only scope in every document, type, test, and design change.
 - The Guest is untrusted and reads `privenv.manifest.json` only.
 - The Guest creates `EffectRequest` JSON only.
 - The Guest must never read `.env`, `.env.*`, `privenv.host.json`, `.privenv/vault.json`, `.privenv/audit.log.jsonl`, browser sessions, or raw secret material.
