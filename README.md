@@ -39,6 +39,7 @@ Install dependencies, then run the local checks:
 npm install
 npm run typecheck
 npm test
+npm run pack:check
 ```
 
 Create or obtain a Host-generated `privenv.manifest.json`, then list capabilities:
@@ -53,7 +54,19 @@ Create an `EffectRequest` for a capability:
 privenv-guest request cmd.npm.test
 ```
 
-The request is printed to stdout. It is not sent to a Host yet because transport is not implemented.
+The request is printed to stdout. It is not sent to a Host yet because transport is not implemented. The Guest package never reads Host-owned files such as `privenv.host.json`, `.privenv/vault.json`, or `.privenv/audit.log.jsonl`.
+
+## Development Checks
+
+Run the same checks locally that CI runs on every push and pull request:
+
+```sh
+npm run typecheck
+npm test
+npm run pack:check
+```
+
+CI uses Node.js 20 and does not publish packages, deploy, require repository secrets, implement transport, or contact a Host.
 
 ## CLI Commands
 

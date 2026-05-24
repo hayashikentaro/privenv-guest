@@ -29,6 +29,12 @@ Guidance for future Codex agents working in `privenv-guest`.
 - Never add APIs that read raw secrets.
 - Never introduce `getSecret()`, `getEnv()`, `rawEnv()`, raw vault readers, or raw `.env` readers.
 
+## Package Hygiene
+
+- Package checks must keep Host-owned files out of npm pack output.
+- Do not package `.env`, `.env.*`, `.privenv/`, `privenv.host.json`, vault files, audit logs, `src/`, `tests/`, or `dist/tests/`.
+- Do not add deploy, npm publish, or secret-requiring CI behavior unless explicitly requested.
+
 ## Examples and Tests
 
 - Keep examples fixture-only and obviously fake.
