@@ -121,6 +121,7 @@ Phase 1 is stdio JSON request/response with the Host. Phase 2 may add a future t
 
 ## Documentation
 
+- [Architecture Snapshot](docs/architecture-snapshot.md)
 - [Concept](docs/concept.md)
 - [Trust Model](docs/trust-model.md)
 - [Guest Boundary](docs/guest-boundary.md)
